@@ -1,26 +1,53 @@
 import React from 'react';
-import './App.css';
-
+import Layout from './components/Layout';
+import Chat from './components/Chat';
 function App() {
-  const [content, setContent] = React.useState<string>("");
+  const [question, setQuestion] = React.useState<string>("");
+  const [result, setResult] = React.useState();
+  const [file, setFile] = React.useState();
+
+  const handleQuestionChange = (e: any) => {
+    setQuestion(e?.target.value)
+  }
+
+  const handleFileChange = (e: any) => {
+    setFile(e?.target.files[0])
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const formData = new FormData()
+
+    if (file) {
+      formData.append('file', file);
+    }
+
+    if (question) {
+      formData.append('question', question)
+    }
+
+    fetch('http://127.0.0.1:5000/predict', {
+      method: "POST",
+      body: formData
+    }).then(res => res.json())
+      .then((data) => {
+        setResult(data.result)
+      })
+      .catch(error => console.error(error))
+  }
   return (
-    <div >
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        fetch('/message?'
-          + new URLSearchParams({
-            message: content,
-          })
-        ).then(res => res.json())
-          .then(data => alert(data));
-      }}>
-        <input
-          name="msg"
-          value={content}
-          type="text"
-          onChange={(e) => setContent(e.target.value)} />
-        <button type="submit">Send</button>
+    <div className="h-[100dvh] text-white">
+      {/* <form onSubmit={handleSubmit}>
+        <input type="text" id="question" value={question} onChange={handleQuestionChange} />
+        <input type="file" id="file" accept=".csv" onChange={handleFileChange} />
+        <button type="submit" className="bg-red-500">Submit</button>
       </form>
+      AI says:  {result} */}
+
+      <Layout>
+        <Chat/>
+      </Layout>
     </div>
   );
 }
