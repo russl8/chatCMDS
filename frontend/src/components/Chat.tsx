@@ -60,7 +60,7 @@ const startGame = (setMessages: any, messages: any) => {
         }
         formData.append("existingMessages", aiFormat(trainedMessages))
         console.log("1:" + messages.length + "  " + trainedMessages.length)
-        fetch('http://127.0.0.1:5000/predict', {
+        fetch('https://chatcmds.onrender.com/predict', {
             method: "POST",
             body: formData
         }).then(res => res.json())

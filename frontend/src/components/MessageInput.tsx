@@ -43,7 +43,7 @@ const MessageInput = ({ messages, setMessages, startGame }: MessageInputProps) =
         // formData.append("prompt", text);
         formData.append("existingMessages", aiFormat(messages))
         console.log("send message. all messages: "+ messages.length)
-        fetch('http://127.0.0.1:5000/predict', {
+        fetch('https://chatcmds.onrender.com/predict', {
             method: "POST",
             body: formData
         }).then(res => res.json())
