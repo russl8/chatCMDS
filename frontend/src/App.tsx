@@ -1,34 +1,7 @@
-import React from 'react';
 import Layout from './components/Layout';
 import Chat from './components/Chat';
 function App() {
-  const [question, setQuestion] = React.useState<string>("");
-  const [result, setResult] = React.useState();
-  const [file, setFile] = React.useState();
 
-  const handleQuestionChange = (e: any) => {
-    setQuestion(e?.target.value)
-  }
-
-  const handleFileChange = (e: any) => {
-    setFile(e?.target.files[0])
-  }
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    const formData = new FormData()
-
-    if (file) {
-      formData.append('file', file);
-    }
-
-    if (question) {
-      formData.append('question', question)
-    }
-
-   
-  }
   return (
     <div className="h-[100dvh] text-white">
       {/* <form onSubmit={handleSubmit}>
