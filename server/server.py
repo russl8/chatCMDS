@@ -4,7 +4,6 @@ from os import environ
 from openai import OpenAI
 from flask_cors import CORS
 import json
-from apikey import apikey
 app = Flask(__name__)
 
 CORS(app)
