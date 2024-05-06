@@ -27,14 +27,7 @@ function App() {
       formData.append('question', question)
     }
 
-    fetch('http://127.0.0.1:5000/predict', {
-      method: "POST",
-      body: formData
-    }).then(res => res.json())
-      .then((data) => {
-        setResult(data.result)
-      })
-      .catch(error => console.error(error))
+   
   }
   return (
     <div className="h-[100dvh] text-white">
