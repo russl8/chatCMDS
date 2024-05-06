@@ -10,7 +10,6 @@ CORS(app)
 # venv: venv\Scripts\activate
 # how to delete environments??!
 # todo: setup anaconda
-os.environ["OPENAI_API_KEY"] = apikey
 
 @app.route("/predict", methods=["POST"])
 def predict():
